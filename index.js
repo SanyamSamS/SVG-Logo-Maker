@@ -37,7 +37,7 @@ function writeToFile(fileName, data) {
 
 // Function to initialize app
 function init() {
-    inquirer.promt(questions)
+    inquirer.prompt(questions)
     .then((data) => {
         console.log('Creating SVG file')
         writeToFile('logo.svg', shapes(data))
