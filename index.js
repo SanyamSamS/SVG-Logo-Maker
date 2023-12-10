@@ -38,9 +38,13 @@ function writeToFile(fileName, data) {
 // Function to initialize app
 function init() {
     inquirer.prompt(questions)
+    const shapeClass = shapes[data.shape];
+    const newShape = new shapeClass(data.shape, data.shape-color);
+    newShape.setColor(data.shape-color);
+    const svgMarkup = newShape.render();
     .then((data) => {
         console.log('Creating SVG file')
-        writeToFile('logo.svg', shapes(data))
+        writeToFile('logo.svg', svgMarkup)
     })
 }
 
