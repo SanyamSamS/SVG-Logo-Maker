@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const jest = require('jest');
-const shapes = require('./lib/shapes');
+const { Shape, shapes } = require('./lib/shapes');
 
 // Array of questions for user input
 const questions = [
@@ -37,14 +37,13 @@ function writeToFile(fileName, data) {
 
 // Function to initialize app
 function init() {
-    inquirer.prompt(questions).then((data) => {
-    const shapeClass = shapes[data.shape];
-    const newShape = new shapeClass(data.shape, data.shape-color);
-    newShape.setColor(data.shape-color);
+  inquirer.prompt(questions).then((data) => {
+    const newShape = new shapes[data.shape](data['shape-color']); 
+    newShape.setColor(data['shape-color']);
     const svgMarkup = newShape.render();
-        console.log('Creating SVG file');
-        writeToFile('logo.svg', svgMarkup);
-    })
+    console.log('Creating SVG file');
+    writeToFile('logo.svg', svgMarkup);
+  });
 }
 
 // Call to initialize app
