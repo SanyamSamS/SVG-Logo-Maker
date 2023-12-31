@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const jest = require('jest');
-const { Shape, shapes } = require('./lib/shapes');
+const { SVG, shapes, Text } = require('./lib/shapes');
 
 // Array of questions for user input
 const questions = [
@@ -40,7 +40,12 @@ function init() {
   inquirer.prompt(questions).then((data) => {
     const newShape = new shapes[data.shape](data['shape-color']); 
     newShape.setColor(data['shape-color']);
+
+    const logoText = new Text(data['logo-text'], data['text-color']);
+    logoText.setColor(data['text-color']);
+
     const svgMarkup = newShape.render();
+
     console.log('Creating SVG file');
     writeToFile('logo.svg', svgMarkup);
   });
