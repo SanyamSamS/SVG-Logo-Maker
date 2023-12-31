@@ -44,7 +44,7 @@ function init() {
     const logoText = new Text(data['logo-text'], data['text-color']);
     logoText.setColor(data['text-color']);
 
-    const svgMarkup = newShape.render();
+    const svgMarkup = new SVG(newShape, logoText).render();
 
     console.log('Creating SVG file');
     writeToFile('logo.svg', svgMarkup);
